@@ -6,6 +6,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(glue={"steps"}, features = "src/test/resources")
+@CucumberOptions(glue={"steps"}, features = "src/test/resources",
+plugin = {"html:target/cucumber-html-report"})
 public class RunCucumberTest {
 }
