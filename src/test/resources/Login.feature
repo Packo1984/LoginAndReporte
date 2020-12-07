@@ -10,4 +10,9 @@ Feature: Login Functionality
 
     Given Usuario esta en al pantalla de login de la aplicación automationpractice
     When Usuario ingresa credenciales validas
+    When Usuario Ingresa Seccion Clientes
+    When usuario Ingresa datos mínimos de captura
+    When usuario elige tipo persona
+    When usuario captura datos generales
+    When usuario captura domicilios
     Then muestra pagina de inicio
