@@ -2,75 +2,83 @@
 
     import static org.junit.Assert.assertTrue;
 
-    import org.openqa.selenium.By;
+    import io.cucumber.java.en.And;
     import io.cucumber.java.After;
     import io.cucumber.java.Before;
     import io.cucumber.java.en.Given;
     import io.cucumber.java.en.Then;
     import io.cucumber.java.en.When;
+    import org.openqa.selenium.By;
     import org.openqa.selenium.WebDriver;
-
-    import java.security.PrivateKey;
 
     public class Steps{
         private WebDriver driver;
-        SingInPage singInPage;
-        Cliente cliente;
+        AltaCliente altaCliente;
+
 
         @Before()
         public void setup() {
-            singInPage =new SingInPage(driver);
-            driver=singInPage.chromeDriverConetion();
+            altaCliente =new AltaCliente(driver);
+            driver=altaCliente.chromeDriverConetion();
+            altaCliente.visit("http://mxsrvwasmui1t.alico.corp/ClienteUnico/login.jsp");
             driver.manage().window().maximize();
         }
 
-        @Given("Usuario esta en el Login")
-        @Given("Usuario esta en al pantalla de login de la aplicación automationpractice")
-        public void estarPantallaLogin() {
-            singInPage.visit("http://mxsrvwasmui1t.alico.corp/ClienteUnico/login.jsp");
-        }
+        @Given("^Ingresa al sistema satisfactoriamente (.*) And (.*)$")
+        public void ingresaSatisfactoriamente(String usuario, String password) throws InterruptedException {
+            altaCliente.SingIn(usuario,password);
 
-        @When("Usuario ingresa credenciales validas")
-        public void IngresarCredencialesValidas() throws InterruptedException {
-           singInPage.SingIn();
         }
 
 
         @When("Usuario Ingresa Seccion Clientes")
         public void seccionCliente() throws InterruptedException {
             Thread.sleep(3000);
-            singInPage.clicBtnCliente();
+            altaCliente.clicBtnCliente();
          }
 
-        @When("usuario Ingresa datos mínimos de captura")
+        @And("usuario Ingresa datos mínimos de captura")
         public void usuarioIngresaDatosMínimosDeCaptura() throws InterruptedException {
-            singInPage.datosMinimos();
+            altaCliente.datosMinimos();
 
         }
 
-        @When("usuario elige tipo persona")
-        public void usuarioEligeTipoPersona() throws InterruptedException {
-            singInPage.personaFisica();
-        }
-        @When("usuario captura datos generales")
+        @And("usuario captura datos generales")
         public void usuarioCapturaDatosGenerales() throws InterruptedException {
-            singInPage.datosGenerales();
+            altaCliente.datosGenerales();
         }
 
-        @When("usuario captura domicilios")
+        @And("usuario captura domicilios")
         public void usuarioCapturaDomicilios() throws InterruptedException {
-            singInPage.domicilios();
+            altaCliente.domicilios();
         }
 
-        @Then("muestra pagina de inicio")
-        public void muestraPaginaInicio() throws InterruptedException {
-            singInPage.isHomeDisplayed();
+        @And("usuario captura Lugar de nacimiento")
+        public void usuarioCapturaLugarDeNacimiento() throws InterruptedException {
+            altaCliente.lugarNacimiento();
+        }
+
+
+
+        @And("usuario ingresa Telefonos")
+        public void usuarioIngresaTelefonos() throws InterruptedException {
+            altaCliente.telefonos();
+        }
+
+        @And("usuario ingresa Redes Sociales")
+        public void usuarioIngresaRedesSociales() {
+
+        }
+
+        @Then("Captura Folio")
+        public void CapturaFolio() throws InterruptedException {
+            altaCliente.obtieneFolio();
         }
 
         @After()
         public void quitBrowser() throws InterruptedException {
             Thread.sleep(1000);
-            singInPage.cerrarSesion();
+            //altaCliente.cerrarSesion();
             // driver.quit();
         }
 

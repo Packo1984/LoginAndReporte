@@ -1,11 +1,11 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/Login.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/AltaCliente.feature");
 formatter.feature({
-  "name": "Login Functionality",
-  "description": "  In order to do internet banking\n  As a valid automationpractice customer\n  I want to login successfully",
+  "name": "Funcionalidad Alta Cciente de Individual Privado",
+  "description": "  Se dan de alta cliente spara poder realizar\n  Emisiones en la linea de negocio de individual privado.",
   "keyword": "Feature"
 });
 formatter.scenario({
-  "name": "Login Successful",
+  "name": "Alta Cliente",
   "description": "",
   "keyword": "Scenario",
   "tags": [
@@ -18,36 +18,34 @@ formatter.before({
   "status": "passed"
 });
 formatter.step({
-  "name": "Usuario esta en al pantalla de login de la aplicación automationpractice",
+  "name": "Se ha ingresado en sección clientes",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "steps.Steps.estarPantallaLogin() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
+  "location": "steps.StepsClient.seccionCliente() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
 });
 formatter.result({
-  "status": "passed"
+  "error_message": "java.lang.NullPointerException\r\n\tat steps.StepsClient.seccionCliente(StepsClient.java:16)\r\n\tat ✽.Se ha ingresado en sección clientes(///C:/Users/Hitss/IdeaProjects/PruebasCucunber1/src/test/resources/AltaCliente.feature:9)\r\n",
+  "status": "failed"
 });
 formatter.step({
-  "name": "Usuario ingresa credenciales validas",
+  "name": "usuario Ingresa datos del cliente",
   "keyword": "When "
 });
 formatter.match({
-  "location": "steps.Steps.IngresarCredencialesValidas() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
+  "location": "steps.StepsClient.usuarioIngresadatosdelcliente() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
 });
 formatter.result({
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.step({
-  "name": "muestra pagina de inicio",
+  "name": "muestra ID",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.Steps.muestraPaginaInicio() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
+  "location": "steps.StepsClient.muestraID() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
 });
 formatter.result({
-  "status": "passed"
-});
-formatter.after({
-  "status": "passed"
+  "status": "skipped"
 });
 });
