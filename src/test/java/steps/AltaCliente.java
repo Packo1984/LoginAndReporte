@@ -52,10 +52,6 @@ public class AltaCliente extends Base {
     By txtEstado=By.xpath("//div[@id='direccionId']/div[2]/div/div/div/div[2]/div/div/div/div/div/table/tbody/tr/td[9]/div/div[3]/input");
 
     By btnAgDom=By.xpath("//div[@id='direccionId']/div[2]/div/div/div/div[2]/div/div/div/div/div/table/tbody/tr/td[15]/div/span/span/span[@title='ok']");
-    By btnGuardar=By.xpath("//div[@id='datosTab']/div[2]/span[3]/span/span");
-    By btnConfirGuardar=By.xpath("//div[contains(@id,'dijit_Dialog')]/div[2]/div[2]/span[1]/span/span");
-    By btnAceptConfirm=By.xpath("(//div[contains(@id,'dijit_Dialog')]/div[2]/div[2]/span[1]/span/span)[2]");
-    By txtIdCliente=By.xpath("//div[contains(@id,'dijit_layout_ContentPane')]/table/tbody/tr/td[2]/label/b");
 
     public void SingIn(String usuario, String password) throws InterruptedException {
         if (isDisplayed(user)){
@@ -81,12 +77,15 @@ public class AltaCliente extends Base {
         Click(btnCliente);
     }
 
-    By etiquetaLineNegocio=By.xpath("//*[text()='INDIVIDUAL PRIVADO']");
-    By etiquetaRamo=By.xpath("//*[text()='VIDA']");
-    By etiquetaProducto=By.xpath("//*[text()='METALIFE']");
-    By etiquetaRol=By.xpath("//*[text()='BENEFICIARIO']");
 
-    public  void datosMinimos() throws InterruptedException {
+
+    public  void datosMinimos(String lineaNegocio, String ramo, String producto,
+                              String rol) throws InterruptedException {
+        By etiquetaLineNegocio=By.xpath("//*[text()='"+lineaNegocio+"']");
+        By etiquetaRamo=By.xpath("//*[text()='"+ramo+"']");
+        By etiquetaProducto=By.xpath("//*[text()='"+producto+"']");
+        By etiquetaRol=By.xpath("//*[text()='"+rol+"']");
+
         Click(listLineaNegocio);
         esperaListDesplegable(etiquetaLineNegocio);
         keyEnter(txtLineaNegocio);
@@ -123,33 +122,38 @@ public class AltaCliente extends Base {
     By txtNSS=By.id("nssID");
 
 
-    By etiquetaTitulo=By.xpath("//*[text()='SR.']");
-    By masculino=By.xpath("//*[text()='MASCULINO']");
-    By edoCivil=By.xpath("//*[text()='SOLTERO (A)']");
-    By etiquetaTipoIdent=By.xpath("//*[text()='CEDULA PROFESIONAL']");
 
-    public void datosGenerales() throws InterruptedException {
+
+    public void datosGenerales(String titulo, String nombre, String aPaterno, String aMaterno,
+                               String fecNaci, String rfc, String curp, String genero, String edoCivil,
+                               String tipoIdent, String numIdent, String nss) throws InterruptedException {
+
+        By etiquetaTitulo=By.xpath("//*[text()='"+titulo+"']");
+        By etiquetaMasculino=By.xpath("//*[text()='"+genero+"']");
+        By etiquetaEdoCivil=By.xpath("//*[text()='"+edoCivil+"']");
+        By etiquetaTipoIdent=By.xpath("//*[text()='"+tipoIdent+"']");
+
         Click(listtitulo);
         esperaListDesplegable(etiquetaTitulo);
         keyEnter(listtitulo);
 
-        type("Paco",txtNombre);
-        type("Munguia",txtAPaterno);
-        type("Contreras",txtAMaterno);
-        type("29011984",txtFNacimiento);
-        type("PAMU8401293u7",txtRFC);
-        type("PAMU840129HHGRRR04",txtCURP);
+        type(nombre,txtNombre);
+        type(aPaterno,txtAPaterno);
+        type(aMaterno,txtAMaterno);
+        type(fecNaci,txtFNacimiento);
+        type(rfc,txtRFC);
+        type(curp,txtCURP);
         Click(listGenero);
-        esperaListDesplegable(masculino);
+        esperaListDesplegable(etiquetaMasculino);
         keyEnter(opcionGenero);
         Click(listEdoCivil);
-        esperaListDesplegable(edoCivil);
+        esperaListDesplegable(etiquetaEdoCivil);
         keyEnter(opcionEdoCivil);
         Click(listIdentificación);
         esperaListDesplegable(etiquetaTipoIdent);
         keyEnter(listIdentificación);
-        type("1234556",txtNumIdent);
-        type("98656",txtNSS);
+        type(numIdent,txtNumIdent);
+        type(nss,txtNSS);
     }
 
     By seccionLugarNacimiento=By.id("lugarNacId");
@@ -157,56 +161,62 @@ public class AltaCliente extends Base {
     By txtEdoProv=By.id("edoNacID");
     By txtMpio=By.id("mpioNacID");
     By btnAgregarNacionalidad=By.xpath("//div[@id='nacionalidadId']/table/tbody/tr/td/span/span/span");
-    By indexNacionalidad=By.xpath("//div[@id='tblDGPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[@idx='0']");
+    By listNacionalidad=By.xpath("//div[@id='tblDGPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/div/div[1]/input");
+    By txtNacionalidad=By.xpath("//div[@id='tblDGPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/div/div[3]/input");
     By btnCofiNacionalidad=By.xpath("//div[@id='tblDGPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[2]/div/span[1]/span/span");
 
-    By etiquetaPaisNacimiento=By.xpath("//*[text()='MEXICO']");
-
-    public void lugarNacimiento() throws InterruptedException {
+    public void lugarNacimiento(String paisNaci,String edoPro,String ciuPoblacion, String nacionalidad) throws InterruptedException {
         Click(seccionLugarNacimiento);
         Click(listPaisNacimiento);
+
+        By etiquetaPaisNacimiento=By.xpath("//*[text()='"+paisNaci+"']");
         esperaListDesplegable(etiquetaPaisNacimiento);
         keyEnter(listPaisNacimiento);
-        type("Hidalgo",txtEdoProv);
-        type("Huejutla",txtMpio);
-        Click(btnAgregarNacionalidad);
-        Thread.sleep(1000);
-        //Click(indexNacionalidad);
-        //Thread.sleep(6000);
-        //type("MEXICO",indexNacionalidad);
-        //Thread.sleep(1000);
-        esperaListDesplegable(btnCofiNacionalidad);
 
+        type(edoPro,txtEdoProv);
+        type(ciuPoblacion,txtMpio);
+        Click(btnAgregarNacionalidad);
+
+        Click(listNacionalidad);
+        Thread.sleep(1000);
+        type(nacionalidad,txtNacionalidad);
+
+        esperaListDesplegable(btnCofiNacionalidad);
     }
 
-    By etiquetaTipoDom=By.xpath("//*[text()='PARTICULAR']");
-    public void domicilios() throws InterruptedException {
+
+    public void domicilios(String tipoDomic, String calleAvenida, String numExt, String cp, String colonia,
+                           String municDeleg, String ciudad, String estado) throws InterruptedException {
+
+
         Click(seccionDomicilios);
         esperaListDesplegable(btnAgregarDom);
+
         Click(listTipoDom);
+        By etiquetaTipoDom=By.xpath("//*[text()='"+tipoDomic+"']");
         esperaListDesplegable(etiquetaTipoDom);
 
         Click(opcionCalleAve);
-        type("Abasolo",txtCalleAve);
+        type(calleAvenida,txtCalleAve);
         Click(opcionNumExt);
-        type("32",txtNumExt);
+        type(numExt,txtNumExt);
         Click(opcionCP);
-        type("43000",txtCP);
+        type(cp,txtCP);
         keyEnter(txtCP);
         Thread.sleep(1000);
         Click(opcionColonia);
-        type("HUEJUTLA DE REYES CENTRO",txtColonia);
+        type(colonia,txtColonia);
         keyEnter(txtColonia);
 
         Click(opcionMunDel);
-        type("HUEJUTLA DE REYES",txtMunDel);
+        type(municDeleg,txtMunDel);
         keyEnter(txtMunDel);
 
         Click(opcionCiudad);
-        type("HUEJUTLA DE REYES",txtCiudad);
+        type(ciudad,txtCiudad);
         keyEnter(txtCiudad);
         Click(opcionEstado);
-        type("HIDALGO",txtEstado);
+        type(estado,txtEstado);
         keyEnter(txtEstado);
         Thread.sleep(500);
 
@@ -215,33 +225,115 @@ public class AltaCliente extends Base {
 
     By seccionTelefonos= By.id("telefonoIdPF");
     By btnAgregarTel=By.id("btnAgregarTel");
+    By listTipoTel=By.xpath("//div[@id='tblTelPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/div/div[1]/input");
+    By txtTipoTel=By.xpath("//div[@id='tblTelPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/div/div[3]/input");
+    By columnaNumTel=By.xpath("//div[@id='tblTelPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[2]");
+    By txtNumTel=By.xpath("//div[@id='tblTelPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[2]/div/div[2]/input");
+    By btnOkTel=By.xpath("//div[@id='tblTelPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[4]/div/span[1]/span/span");
 
-    By listTipoTel=By.xpath("//div[@id='tblTelPF']/div[2]/div/div/div/div/div/table/tbody/tr/td[@idx='0']");
 
-    public void telefonos() throws InterruptedException {
+    public void telefonos(String Tipo, String numTel) throws InterruptedException {
         Click(seccionTelefonos);
         esperaListDesplegable(btnAgregarTel);
-        Thread.sleep(2000);
+
         Click(listTipoTel);
-        Thread.sleep(2000);
-        type("MOVIL",listTipoTel);
+        By etiquetaTipoTel=By.xpath("//*[text()='"+Tipo+"']");
+        esperaListDesplegable(etiquetaTipoTel);
+        keyEnter(listTipoTel);
+
+        Click(columnaNumTel);
+        Thread.sleep(1000);
+        type(numTel,txtNumTel);
+
+        Click(btnOkTel);
     }
 
-    By seccionRedesSociales=By.id("redesId_titleBarNode");
-    public void redesSociales(){
-        Click(seccionRedesSociales);
+    By pestOcupacion=By.id("tabUpdateCustomer_tablist_OcupacionID");
+    By seccionOcupacion=By.id("ocupaPagoId_titleBarNode");
+    By btnAgregarOcupacion=By.xpath("//div[@id='tblOC']/following-sibling::div/span/span/span");
+    By listOcupacion=By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/div[1]/div[1]/input");
+    By txtOcupacion= By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[1]/div/div[3]/input");
+    By columnaClaveOcupacion= By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[2]");
+    By listClaveOcupacion=By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[2]/div/div[1]");
+    By txtClaveOcupacion=By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[2]/div/div/div[3]/input");
+    By columnaDetalleOcupa= By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[3]");
+    By txtDetalleOcupa=By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[3]/div/div[2]/input");
+    By  btnOkOcupacion=By.xpath("//div[@id='tblOC']/div[2]/div/div/div/div/div/table/tbody/tr/td[4]/div/span[1]/span/span");
+    public void pestañaOcupacion(String ocupacion, String claveOcupa, String detalleOcupa
+    ) throws InterruptedException {
+        Click(pestOcupacion);
+        Click(seccionOcupacion);
+        esperaListDesplegable(btnAgregarOcupacion);
+
+        Click(listOcupacion);
+        type(ocupacion,txtOcupacion);
+        keyEnter(txtOcupacion);
+        Thread.sleep(500);
+        esperaListDesplegable(columnaClaveOcupacion);
+        Click(listClaveOcupacion);
+        By etiquetaClaveOcupacion=By.xpath("//*[text()='"+claveOcupa+"']");
+        esperaListDesplegable(etiquetaClaveOcupacion);
+
+        Click(columnaDetalleOcupa);
+        type(detalleOcupa,txtDetalleOcupa);
+
+        Click(btnOkOcupacion);
+    }
+
+    By txtIngresoMensual=By.id("ingMenID");
+    public void percepcionMensual(String ingresoMensual) throws InterruptedException {
+        type(ingresoMensual,txtIngresoMensual);
 
     }
+
+    By btnPestañaDeclaPErfilTrans=By.id("tabUpdateCustomer_tablist_dptTab");
+    By txtapoNumTranAnual=By.id("ptNumTransID");
+    By txtretNumTranAnual=By.id("ptNumRetirosID");
+    By txtapoMonTrnAnual=By.id("ptMontTransID");
+    By txtretMonTrnAnual=By.id("ptMontRetirosID");
+    public void perfilTransaccional(String apoNumTranAnual, String retNumTranAnual, String apoMonTrnAnual, String retMonTrnAnual) throws InterruptedException {
+        Click(btnPestañaDeclaPErfilTrans);
+        type(apoNumTranAnual,txtapoNumTranAnual);
+        type(retNumTranAnual,txtretNumTranAnual);
+        type(apoMonTrnAnual,txtapoMonTrnAnual);
+        type(retMonTrnAnual,txtretMonTrnAnual);
+    }
+
+
+    By rbtnFuncionesPublicN=By.id("pepID_N");
+    By rbtnFuncionesPublicS=By.id("pepID_S");
+    public void declaracionImpuestos(String funcionesPublicas){
+        System.out.println("Ingresa al método: "+funcionesPublicas);
+
+
+             esperaListDesplegable(rbtnFuncionesPublicN);
+
+     }
+
+
+
+    By pestañaAvisoPrivacidad=By.id("tabUpdateCustomer_tablist_pdcTab");
+    By rbtnDivulgacionDatosS=By.id("reusID_S");
+    public void avisoPrivacidad(){
+    Click(pestañaAvisoPrivacidad);
+    esperaListDesplegable(rbtnDivulgacionDatosS);
+    }
+
+
+    By btnGuardar=By.xpath("//div[@id='commentsCusId']/following-sibling::div/span[4]/span/span");
+    By btnConfirGuardar=By.xpath("//div[contains(@id,'dijit_Dialog')]/div[2]/div[2]/span[1]/span/span");
+    By btnAceptConfirm=By.xpath("(//div[contains(@id,'dijit_Dialog')]/div[2]/div[2]/span[1]/span/span)[2]");
+    By txtIdCliente=By.xpath("//div[contains(@id,'dijit_layout_ContentPane')]/table/tbody/tr/td[2]/label/b");
 
     public void obtieneFolio() throws InterruptedException {
-        //Thread.sleep(500);
-        //Click(btnGuardar);
-        //Thread.sleep(500);
-        //Click(btnConfirGuardar);
-        //Thread.sleep(500);
-        //obtieneTexto(txtIdCliente);
-        //Thread.sleep(500);
-        //Click(btnAceptConfirm);
+        Thread.sleep(500);
+        Click(btnGuardar);
+        Thread.sleep(500);
+        Click(btnConfirGuardar);
+        Thread.sleep(500);
+        obtieneTexto(txtIdCliente);
+        Thread.sleep(500);
+        Click(btnAceptConfirm);
 
 
 

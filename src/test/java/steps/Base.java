@@ -42,6 +42,7 @@ public class Base {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).click();
     }
 
+
     public void keyEnter(By locator){
         driver.findElement(locator).sendKeys(Keys.chord(Keys.ENTER));
     }

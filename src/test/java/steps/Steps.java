@@ -37,37 +37,53 @@
             altaCliente.clicBtnCliente();
          }
 
-        @And("usuario Ingresa datos mínimos de captura")
-        public void usuarioIngresaDatosMínimosDeCaptura() throws InterruptedException {
-            altaCliente.datosMinimos();
+        @And("^usuario Ingresa datos mínimos de captura (.*) And (.*) And (.*) And (.*)$")
+        public void usuarioIngresaDatosMínimosDeCaptura(String lineaNegocio, String ramo, String producto,
+                                                        String rol) throws InterruptedException {
+            altaCliente.datosMinimos(lineaNegocio, ramo, producto, rol);
 
         }
 
-        @And("usuario captura datos generales")
-        public void usuarioCapturaDatosGenerales() throws InterruptedException {
-            altaCliente.datosGenerales();
+        @And("^usuario captura datos generales (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*)$")
+        public void usuarioCapturaDatosGenerales(String titulo, String nombre, String aPaterno, String aMaterno,
+                                                  String fecNaci, String rfc, String curp, String genero, String edoCivil,
+                                                 String tipoIdent, String numIdent, String nss) throws InterruptedException {
+            altaCliente.datosGenerales(titulo, nombre, aPaterno, aMaterno, fecNaci,
+                    rfc, curp, genero, edoCivil,
+                    tipoIdent, numIdent, nss);
         }
 
-        @And("usuario captura domicilios")
-        public void usuarioCapturaDomicilios() throws InterruptedException {
-            altaCliente.domicilios();
+        @And("^usuario captura Lugar de nacimiento (.*) And (.*) And (.*) And (.*)$")
+        public void usuarioCapturaLugarDeNacimiento(String paisNaci,String edoPro,String ciuPoblacion, String nacionalidad) throws InterruptedException {
+            altaCliente.lugarNacimiento(paisNaci, edoPro, ciuPoblacion, nacionalidad);
         }
 
-        @And("usuario captura Lugar de nacimiento")
-        public void usuarioCapturaLugarDeNacimiento() throws InterruptedException {
-            altaCliente.lugarNacimiento();
+        @And("^usuario captura domicilios (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*) And (.*)$")
+        public void usuarioCapturaDomicilios( String tipoDomic, String calleAvenida, String numExt, String cp, String colonia,
+                                              String municDeleg, String ciudad, String estado) throws InterruptedException {
+            altaCliente.domicilios(tipoDomic, calleAvenida, numExt, cp, colonia, municDeleg, ciudad, estado);
+        }
+
+        @And("^usuario ingresa Telefonos (.*) And (.*)$")
+        public void usuarioIngresaTelefonos(String Tipo, String numTel) throws InterruptedException {
+            altaCliente.telefonos(Tipo, numTel);
+        }
+
+        @And("^usuario ingresa ocupacion (.*) And (.*) And (.*)$")
+        public void usuarioIngresaocupacion(String ocupacion, String claveOcupa, String detalleOcupa
+        ) throws InterruptedException {
+            altaCliente.pestañaOcupacion(ocupacion, claveOcupa, detalleOcupa);
+        }
+
+        @And("^usuario ingresa percepcion mensual (.*)$")
+        public void usuarioIngresaPercepcionMensualNgreosMensual(String ingresoMensual) throws InterruptedException {
+            altaCliente.percepcionMensual(ingresoMensual);
         }
 
 
-
-        @And("usuario ingresa Telefonos")
-        public void usuarioIngresaTelefonos() throws InterruptedException {
-            altaCliente.telefonos();
-        }
-
-        @And("usuario ingresa Redes Sociales")
-        public void usuarioIngresaRedesSociales() {
-
+        @And("^usuario ingresa perfil transaccional (.*) And (.*) And (.*) And (.*)$")
+        public void usuarioIngresaPerfilTransaccional(String apoNumTranAnual, String retNumTranAnual, String apoMonTrnAnual, String retMonTrnAnual) throws InterruptedException {
+            altaCliente.perfilTransaccional(apoNumTranAnual, retNumTranAnual, apoMonTrnAnual, retMonTrnAnual);
         }
 
         @Then("Captura Folio")
@@ -83,5 +99,13 @@
         }
 
 
+        @And("^Usuario ingresa Declaracion de impuestos (.*)$")
+        public void usuarioIngresaDeclaracionDeImpuestos(String funcionesPublicas) {
+            altaCliente.declaracionImpuestos(funcionesPublicas);
+        }
 
+        @And("Usuario ingresa Aviso de Privacidad")
+        public void usuarioIngresaAvisoDePrivasidad() {
+            altaCliente.avisoPrivacidad();
+        }
     }
