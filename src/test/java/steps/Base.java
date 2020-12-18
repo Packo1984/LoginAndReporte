@@ -18,14 +18,18 @@ public class Base {
     public Base() {
     }
 
+
+
     public WebDriver chromeDriverConetion(){
         System.setProperty("webdriver.chrome.driver","C:\\Drivers\\chromedriver.exe");
         driver= new ChromeDriver();
+
         return driver;
     }
 
     public  void type(String inputText, By locator) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 60);
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).sendKeys(inputText);
 
         //driver.findElement(locator).sendKeys(inputText);
@@ -51,10 +55,10 @@ public class Base {
         driver.findElement(locator).sendKeys(Keys.chord(Keys.TAB));
     }
 
-    public void obtieneTexto(By locator){
+    public String obtieneTexto(By locator){
         WebDriverWait wait = new WebDriverWait(driver, 60);
         String elementoTxto=wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
-        System.out.println("El ID es: "+elementoTxto);
+        return elementoTxto;
     }
 
     public Boolean isDisplayed(By locator) {

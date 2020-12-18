@@ -1,51 +1,45 @@
 $(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/AltaCliente.feature");
 formatter.feature({
-  "name": "Funcionalidad Alta Cciente de Individual Privado",
-  "description": "  Se dan de alta cliente spara poder realizar\n  Emisiones en la linea de negocio de individual privado.",
+  "name": "Funcionalidad Alta Clientes",
+  "description": "  Validar que se permita el alta de clientes Persona Fisica",
   "keyword": "Feature"
 });
 formatter.scenario({
-  "name": "Alta Cliente",
+  "name": "Alta Clientes Persona Fisica",
   "description": "",
-  "keyword": "Scenario",
-  "tags": [
-    {
-      "name": "@Login"
-    }
-  ]
+  "keyword": "Scenario"
 });
 formatter.before({
   "status": "passed"
 });
 formatter.step({
-  "name": "Se ha ingresado en sección clientes",
+  "name": "Ingresa al sistema satisfactoriamente \"N3250232\" y \"1DfVLd2T\"",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "steps.StepsClient.seccionCliente() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
+  "location": "steps.StepsAltaClientes.ingresaSatisfactoriamente(String,String) in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1%20-%2011122020-Login%20y%20alta%20cliente%20(sinLogin)/target/test-classes/"
 });
 formatter.result({
-  "error_message": "java.lang.NullPointerException\r\n\tat steps.StepsClient.seccionCliente(StepsClient.java:16)\r\n\tat ✽.Se ha ingresado en sección clientes(///C:/Users/Hitss/IdeaProjects/PruebasCucunber1/src/test/resources/AltaCliente.feature:9)\r\n",
-  "status": "failed"
+  "status": "passed"
 });
 formatter.step({
-  "name": "usuario Ingresa datos del cliente",
+  "name": "Usuario llena datos del cliente",
   "keyword": "When "
 });
 formatter.match({
-  "location": "steps.StepsClient.usuarioIngresadatosdelcliente() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
+  "location": "steps.StepsAltaClientes.IngresaDatosClientes() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1%20-%2011122020-Login%20y%20alta%20cliente%20(sinLogin)/target/test-classes/"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
-  "name": "muestra ID",
+  "name": "validar id de clientes",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.StepsClient.muestraID() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1/target/test-classes/"
+  "location": "steps.StepsAltaClientes.validar_id_de_clientes() in file:/C:/Users/Hitss/IdeaProjects/PruebasCucunber1%20-%2011122020-Login%20y%20alta%20cliente%20(sinLogin)/target/test-classes/"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 });
