@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PruebasCucunber" />
+        <module name="AltaClienteConExcel_17122020" />
         <module name="PruebasCucunber1" />
         <module name="PruebasCucunber1 - 11122020-Login y alta cliente (sinLogin)" />
       </profile>

@@ -19,6 +19,7 @@ public class PageAltaCliente extends Base {
 
     private WriteExcelFile writeFile;
     private ReadExcelFile readFile;
+
     public void objetoExcel(){
         writeFile=new WriteExcelFile();
         readFile=new ReadExcelFile();
@@ -140,8 +141,10 @@ public class PageAltaCliente extends Base {
     By btnAceptarError=By.xpath("//div[@class='dijitContentPane'][2]/span/span/span");
     By btnSiPerderCambios=By.xpath("//span[contains(text(),'Confirmación')]/ancestor::div[1]/following-sibling::div/div[2]/span[1]/span/span");
     public void manejoExcel() throws IOException, InterruptedException {
+
         String filepath="data/DatosClientes.xlsx";
         String sheetName="Hoja1";
+
         //driver.findElement(searchBoxLocator).sendKeys("dresses");
 
         File file = new File(filepath);
@@ -158,12 +161,13 @@ public class PageAltaCliente extends Base {
         //variable en la que se guarda la cantidad de fila que tiene la hoja de excel
         int rowCount=newSheet.getLastRowNum()-newSheet.getFirstRowNum();
         //System.out.println("numero de filas es: "+rowCount);
+        String errorComunicacion="";
+
         for(int i=1;i<=rowCount;i++){
             //objeto para leer cada fila de la hoja excel
             XSSFRow row=newSheet.getRow(i);
-            try{
-                Click(btnCliente);
-            }catch (Exception e){
+            Click(btnCliente);
+            if(errorComunicacion.equals("Ocurrió un problema al procesar la petición. Consulte al administrador de la aplicación.")) {
                 Thread.sleep(500);
                 Click(btnSiPerderCambios);
             }
@@ -253,8 +257,9 @@ public class PageAltaCliente extends Base {
                             type(row.getCell(j).getStringCellValue(),txtNSS);
                             break;
                         case "paisNaci":
-                            Click(seccionLugarNacimiento); //abre seccion Lugar de nacimiento
                             Thread.sleep(500);
+                            Click(seccionLugarNacimiento); //abre seccion Lugar de nacimiento
+                            Thread.sleep(700);
                             Click(listPaisNacimiento);
                             Thread.sleep(2000);
                             type(row.getCell(j).getStringCellValue(),txtPaisNacimiento);
@@ -428,6 +433,7 @@ public class PageAltaCliente extends Base {
             }catch (Exception e){
                 writeFile.writeCellValue(filepath,sheetName,i,columna+1,obtieneTexto(txtError));
                 Thread.sleep(1000);
+                errorComunicacion=obtieneTexto(txtError);
                 Click(btnAceptarError);
             }
             Thread.sleep(3000);
